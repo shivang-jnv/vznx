@@ -14,7 +14,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-      origin: 'hhttps://vznx-wheat.vercel.app/', //vercel domain
+      origin: 'https://vznx-wheat.vercel.app/', //vercel domain
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true
     }));
