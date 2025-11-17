@@ -1,12 +1,10 @@
 import type { ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = () => {
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -16,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-4xl font-bold text-gray-900">VZNX</h1>
-            <nav className="flex gap-6">
+            <nav className="flex gap-6 items-center">
               <Link
                 to="/"
                 className={`text-base font-medium transition-colors ${
@@ -33,16 +31,26 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 Team
               </Link>
+              <div className="flex items-center gap-4 ml-6 pl-6 border-l border-gray-200">
+                <span className="text-sm text-gray-700">
+                  <span className="font-medium">{user?.name}</span>
+                </span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
             </nav>
           </div>
         </div>
       </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {children}
+        <Outlet />
       </main>
     </div>
   );
 };
 
 export default Layout;
-
