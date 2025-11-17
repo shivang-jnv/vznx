@@ -56,57 +56,63 @@ const Team = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-12 text-gray-600">Loading team members...</div>;
+    return <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading team members...</div>;
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Team Members</h1>
+    <div className="space-y-8">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">People Ops</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-slate-100">Team Members</h1>
+        </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg shadow-blue-500/30 font-medium"
         >
           {showForm ? 'Cancel' : '+ New Member'}
         </button>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-200">
           {error}
         </div>
       )}
 
       {showForm && (
-        <form onSubmit={handleCreateMember} className="mb-6 p-6 bg-white rounded-lg shadow-sm border">
+        <form
+          onSubmit={handleCreateMember}
+          className="p-6 bg-white/80 dark:bg-[#0D1117]/90 border border-gray-200/60 dark:border-[#1a1f2e] rounded-2xl shadow-sm"
+        >
           <input
             type="text"
             value={newMemberName}
             onChange={(e) => setNewMemberName(e.target.value)}
             placeholder="Enter member name"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-[#1a1f2e] bg-white dark:bg-[#050911] text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             autoFocus
           />
           <button
             type="submit"
-            className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            className="mt-3 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg shadow-blue-500/30 font-medium"
           >
             Add Member
           </button>
         </form>
       )}
 
-      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <h3 className="font-semibold text-blue-900 mb-2">Capacity Indicators:</h3>
-        <div className="space-y-1 text-sm">
-          <p className="text-green-700">🟢 Green: 0-3 tasks (Available)</p>
-          <p className="text-orange-700">🟠 Orange: 4-6 tasks (Moderate)</p>
-          <p className="text-red-700">🔴 Red: 7+ tasks (Overloaded)</p>
+      <section className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-2xl">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">Capacity Indicators</h3>
+        <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+          <p>🟢 Green: 0-3 tasks (Available)</p>
+          <p>🟠 Orange: 4-6 tasks (Moderate)</p>
+          <p>🔴 Red: 7+ tasks (Overloaded)</p>
         </div>
-      </div>
+      </section>
 
       {teamMembers.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400 bg-white/70 dark:bg-[#0D1117]/80 border border-dashed border-gray-200 dark:border-[#1a1f2e] rounded-2xl">
           No team members yet. Add your first team member to get started.
         </div>
       ) : (

@@ -221,21 +221,21 @@ const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <div className="text-center py-12 text-gray-600">Loading project...</div>
+      <div className="text-center py-12 text-gray-600 dark:text-gray-400">Loading project...</div>
     );
   }
 
   if (!project) {
     return (
-      <div className="text-center py-12 text-gray-600">Project not found</div>
+      <div className="text-center py-12 text-gray-600 dark:text-gray-400">Project not found</div>
     );
   }
 
   return (
-    <div>
+    <div className="space-y-8">
       <button
         onClick={() => navigate("/")}
-        className="mb-6 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
       >
         <svg
           className="w-5 h-5"
@@ -253,50 +253,56 @@ const ProjectDetail = () => {
         Back to Projects
       </button>
 
-      <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-bold text-gray-900">{project.name}</h1>
+      <div className="bg-white/80 dark:bg-[#0D1117]/90 backdrop-blur-xl rounded-2xl border border-gray-200/60 dark:border-[#1a1f2e] p-6 shadow-sm">
+        <div className="flex flex-wrap items-center gap-4 justify-between mb-6">
+          <div>
+            <p className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">Project Overview</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-slate-100">{project.name}</h1>
+          </div>
           <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
+            className={`px-4 py-1.5 rounded-full text-sm font-semibold border ${
               project.status === "Completed"
-                ? "bg-green-100 text-green-800"
-                : "bg-blue-100 text-blue-800"
+                ? "bg-green-500/15 border-green-400/40 text-green-300"
+                : "bg-blue-500/15 border-blue-400/40 text-blue-200"
             }`}
           >
             {project.status}
           </span>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Overall Progress</span>
-            <span className="font-medium text-gray-900">
+            <span className="text-gray-600 dark:text-gray-400">Overall Progress</span>
+            <span className="font-semibold text-gray-900 dark:text-gray-100">
               {project.progress}%
             </span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-3">
+          <div className="w-full bg-gray-200 dark:bg-[#1a1f2e] rounded-full h-3 overflow-hidden">
             <div
-              className="bg-blue-600 h-3 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300 shadow-lg shadow-blue-500/30"
               style={{ width: `${project.progress}%` }}
             />
           </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Tasks ({tasks.length})
-        </h2>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">Execution</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">
+            Tasks ({tasks.length})
+          </h2>
+        </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg shadow-blue-500/30 font-medium"
         >
           {showForm ? "Cancel" : "+ New Task"}
         </button>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-200">
           {error}
         </div>
       )}
@@ -304,7 +310,7 @@ const ProjectDetail = () => {
       {showForm && (
         <form
           onSubmit={handleCreateTask}
-          className="mb-6 p-6 bg-white rounded-lg shadow-sm border"
+          className="p-6 bg-white/80 dark:bg-[#0D1117]/90 border border-gray-200/60 dark:border-[#1a1f2e] rounded-2xl shadow-sm space-y-4"
         >
           <div className="space-y-3">
             <input
@@ -312,13 +318,13 @@ const ProjectDetail = () => {
               value={newTaskName}
               onChange={(e) => setNewTaskName(e.target.value)}
               placeholder="Enter task name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-[#1a1f2e] bg-white dark:bg-[#050911] text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               autoFocus
             />
             <select
               value={newTaskAssignee}
               onChange={(e) => setNewTaskAssignee(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-[#1a1f2e] bg-white dark:bg-[#050911] text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">Unassigned</option>
               {teamMembers.map((member) => (
@@ -330,7 +336,7 @@ const ProjectDetail = () => {
           </div>
           <button
             type="submit"
-            className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg shadow-blue-500/30 font-medium"
           >
             Create Task
           </button>
@@ -338,7 +344,7 @@ const ProjectDetail = () => {
       )}
 
       {tasks.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-gray-500 dark:text-gray-400 bg-white/70 dark:bg-[#0D1117]/80 border border-dashed border-gray-200 dark:border-[#1a1f2e] rounded-2xl">
           No tasks yet. Add your first task to get started.
         </div>
       ) : (
