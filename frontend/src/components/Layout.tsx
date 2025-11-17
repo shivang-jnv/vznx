@@ -7,7 +7,6 @@ const Layout = () => {
   const { user, logout } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
 
-  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#050911] transition-colors duration-300">
@@ -15,9 +14,9 @@ const Layout = () => {
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center gap-4 justify-between">
           <div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-              VZNX Dark
+              VZNX
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Project intelligence hub</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Architecting Creative Flow</p>
           </div>
 
           <div className="flex items-center gap-6">
