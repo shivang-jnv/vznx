@@ -308,19 +308,17 @@ const Dashboard = () => {
                     : 0;
 
                   return (
-                    <Link
+                    <div
                       key={project._id}
-                      to={`/projects/${project._id}`}
-                      aria-label={`Open ${project.name} project`}
                       className="group relative block bg-white/70 dark:bg-[#0D1117]/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-[#1a1f2e] transition-all duration-300 hover:-translate-y-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60"
-                      onMouseEnter={(event) => {
-                        event.currentTarget.style.boxShadow =
-                          "0 0 25px rgba(139,92,246,0.6), inset 0 0 1px rgba(139,92,246,0.3)";
-                      }}
-                      onMouseLeave={(event) => {
-                        event.currentTarget.style.boxShadow = "";
-                      }}
                     >
+                      <Link
+                        to={`/projects/${project._id}`}
+                        aria-label={`Open ${project.name} project`}
+                        className="absolute inset-0 z-0"
+                        tabIndex={-1}
+                        style={{ pointerEvents: "auto" }}
+                      />
                       <div className="relative z-10 space-y-6">
                         <div className="flex justify-between items-start">
                           <div>
@@ -331,9 +329,47 @@ const Dashboard = () => {
                               {project.name}
                             </h3>
                           </div>
-                          <span className="px-3 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded-full border border-blue-200 dark:border-blue-500/30">
-                            {project.status}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="px-3 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded-full border border-blue-200 dark:border-blue-500/30">
+                              {project.status}
+                            </span>
+                            <button
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                if (
+                                  window.confirm(
+                                    `Delete project '${project.name}'? This cannot be undone.`
+                                  )
+                                ) {
+                                  try {
+                                    await projectService.deleteProject(
+                                      project._id
+                                    );
+                                    await fetchDashboardData();
+                                  } catch (err) {
+                                    alert("Failed to delete project.");
+                                  }
+                                }
+                              }}
+                              className="ml-1 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-500/20 transition-colors"
+                              title="Delete project"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 text-red-500 dark:text-red-400"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M6 7h12M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2m-7 0h10m-1 0v10a2 2 0 01-2 2H9a2 2 0 01-2-2V7m2 0v10m4-10v10"
+                                />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
 
                         <div>
@@ -365,8 +401,10 @@ const Dashboard = () => {
                             View Details
                           </span>
                         </div>
+
+                        {/* ...existing code... */}
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
