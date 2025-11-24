@@ -308,17 +308,12 @@ const Dashboard = () => {
                     : 0;
 
                   return (
-                    <div
+                    <Link
                       key={project._id}
+                      to={`/projects/${project._id}`}
+                      aria-label={`Open ${project.name} project`}
                       className="group relative block bg-white/70 dark:bg-[#0D1117]/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-200/50 dark:border-[#1a1f2e] transition-all duration-300 hover:-translate-y-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60"
                     >
-                      <Link
-                        to={`/projects/${project._id}`}
-                        aria-label={`Open ${project.name} project`}
-                        className="absolute inset-0 z-0"
-                        tabIndex={-1}
-                        style={{ pointerEvents: "auto" }}
-                      />
                       <div className="relative z-10 space-y-6">
                         <div className="flex justify-between items-start">
                           <div>
@@ -335,6 +330,7 @@ const Dashboard = () => {
                             </span>
                             <button
                               onClick={async (e) => {
+                                e.preventDefault();
                                 e.stopPropagation();
                                 if (
                                   window.confirm(
@@ -404,7 +400,7 @@ const Dashboard = () => {
 
                         {/* ...existing code... */}
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
