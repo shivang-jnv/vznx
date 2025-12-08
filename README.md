@@ -1,6 +1,6 @@
 # VZNX — Project & Team Management
 
-🔗 [Live Demo](link)
+🔗 [Live Demo](https://vznx-wheat.vercel.app)
 
 Lightweight operating system for architecture studios — streamlining project tracking, task management, and team collaboration in one unified platform.
 
