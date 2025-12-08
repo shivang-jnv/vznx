@@ -57,7 +57,7 @@ Pull requests welcome! Please keep changes focused and include tests for new fea
 
 ## 📧 Contact
 
-Shivang Kanaujia - [LinkedIn](https://www.linkedin.com/in/shivang-kanaujia-973a6a175/) | [Portfolio]([link](https://portfolio-shivang.vercel.app/))
+Shivang Kanaujia - [LinkedIn](https://www.linkedin.com/in/shivang-kanaujia-973a6a175/) | [Portfolio](https://portfolio-shivang.vercel.app/)
 
 ---
 
