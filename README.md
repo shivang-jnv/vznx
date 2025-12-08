@@ -1,67 +1,64 @@
 # VZNX — Project & Team Management
 
-> Lightweight operating system for architecture studios — tracks projects, tasks and team members.
+🔗 [Live Demo](link)
 
-This repository contains a full-stack sample for the VZNX assignment:
+Lightweight operating system for architecture studios — streamlining project tracking, task management, and team collaboration in one unified platform.
 
-- `backend/` — Node.js + Express API with Mongoose models
-- `frontend/` — React + TypeScript (Vite) single-page app using TailwindCSS
+## ✨ Features
 
-Quick start (development)
+- **Smart Project Tracking** - Real-time project oversight with task dependencies and milestone tracking
+- **Team Management** - Centralized team member profiles with role-based access control via JWT authentication
+- **RESTful API Architecture** - Fully documented API endpoints for seamless integrations and extensibility
+- **Responsive Dashboard** - Mobile-first design with TailwindCSS for on-the-go project management
+- **MongoDB Backend** - Scalable NoSQL database with Mongoose ODM for flexible data modeling
 
-1. Backend
+## 🛠️ Tech Stack
 
-```powershell
-cd D:\vznx\backend; npm install
-# copy .env.example to .env and fill values (MONGODB_URI, JWT_SECRET, etc.)
+**Frontend:** React, TypeScript, Vite, TailwindCSS, Context API  
+**Backend:** Node.js, Express, Mongoose, JWT Authentication  
+**Database:** MongoDB  
+**Deployment:** Vercel (Frontend), Railway/Heroku (Backend)
+
+## 🚀 Quick Start
+
+**Backend Setup:**
+```bash
+cd backend
+npm install
+# Copy .env.example to .env and configure:
+# MONGODB_URI, JWT_SECRET, PORT (default: 4000)
 npm run dev
 ```
 
-2. Frontend
-
-```powershell
-cd D:\vznx\frontend; npm install
-# set frontend env vars (copy .env.example -> .env) — e.g. VITE_API_URL
+**Frontend Setup:**
+```bash
+cd frontend
+npm install
+# Copy .env.example to .env and set:
+# VITE_API_URL=http://localhost:4000
 npm run dev
 ```
 
-API
+**API Endpoints:**
+- `GET /api/projects` - Fetch all projects
+- `POST /api/projects` - Create new project
+- `GET /api/projects/:id/tasks` - Get project tasks
 
-- The backend exposes REST endpoints under `/api` (see `backend/routes/`).
-- Example: `GET /projects`, `POST /projects`, `GET /projects/:id/tasks`.
 
-Environment
 
-- Backend sample vars (add to `backend/.env`):
+## 📦 Deployment
 
-  - `MONGODB_URI` — MongoDB connection string
-  - `JWT_SECRET` — secret for signing tokens
-  - `PORT` — server port (default 4000)
+**Backend:** Deploy to Railway/Heroku with environment variables stored in provider's secret manager  
+**Frontend:** Build with `npm run build` and deploy to Vercel/Netlify
 
-- Frontend sample vars (add to `frontend/.env`):
-  - `VITE_API_URL` — base URL of the backend API (e.g. `http://localhost:4000`)
+## 🤝 Contributing
 
-Development notes
+Pull requests welcome! Please keep changes focused and include tests for new features.
 
-- Frontend uses Contexts for auth and app state (`src/context`) and small presentational components in `src/components`.
-- Backend models live in `backend/models` (Project, Task, TeamMember, User) and controllers in `backend/controllers`.
-- For local testing you can use `mongodb-memory-server` or run a local MongoDB instance.
+## 📧 Contact
 
-Testing
+Shivang Kanaujia - [LinkedIn](https://www.linkedin.com/in/shivang-kanaujia-973a6a175/) | [Portfolio]([link](https://portfolio-shivang.vercel.app/))
 
-- Add Jest/RTL tests to the frontend and Jest + Supertest for backend routes. Use MSW (frontend) and `mongodb-memory-server` (backend) for isolated tests.
+---
 
-Deployment
-
-- The project is structured to deploy individually:
-  - Backend can be deployed to Railway, Heroku, or any Node host. Store secrets in the provider's secret store.
-  - Frontend can be built with `npm run build` and hosted on Vercel, Netlify, or served from a static host.
-
-Contributing
-
-- Open a PR against `main`. Keep changes small and add tests for behavioral changes.
-
-License
-
-This repo is for interview/sample purposes. Add a license file if you plan to open-source it.
-
+*Built for efficient architecture studio workflows*
